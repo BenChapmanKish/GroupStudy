@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_view_group"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="enghack.connect.groupstudy.ViewGroupActivity">
+
+    <TextView
+        android:text="Group Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameView"
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/locationView"
+        android:layout_alignEnd="@+id/locationView"
+        android:translationX="20dp"/>
+
+    <Button
+        android:text="Leave Group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/leave_button"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:text="Meeting Location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationView"
+        android:textSize="18sp"
+        android:layout_marginRight="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_alignBottom="@+id/leave_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:translationX="20dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/userView"/>
+    </ScrollView>
+
+</RelativeLayout>

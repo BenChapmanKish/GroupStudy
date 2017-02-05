@@ -12,12 +12,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="enghack.connect.groupstudy.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_recycler_view"
-        android:scrollbars="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="364dp"
-        android:layout_weight="0.79" />
+        android:layout_weight="0.79"
+        android:layout_height="400dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/groupView"/>
+    </ScrollView>
 
     <LinearLayout
         android:orientation="horizontal"

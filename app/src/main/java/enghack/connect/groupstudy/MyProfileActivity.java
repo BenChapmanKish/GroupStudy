@@ -22,8 +22,6 @@ import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.io.InputStream;
-import java.net.URL;
 
 public class MyProfileActivity extends AppCompatActivity {
 

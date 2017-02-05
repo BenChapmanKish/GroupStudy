@@ -20,20 +20,23 @@ public class FindGroupsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_groups);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.groupView);
 
-        mRecyclerView.setHasFixedSize(true);
+		if (mRecyclerView != null) {
+			mRecyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+			// use a linear layout manager
+			mLayoutManager = new LinearLayoutManager(this);
+			mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
-        mAdapter = new ListAdapter(myDataset);
-        mRecyclerView.setAdapter(mAdapter);
+			// specify an adapter (see also next example)
+			mAdapter = new ListAdapter(myDataset);
+			mRecyclerView.setAdapter(mAdapter);
 
-        Lists list = new Lists("Group Yay");
-        myDataset.add(list);
+
+			//Lists list = new Lists("Group Yay");
+			//myDataset.add(list);
+		}
     }
 
 }
