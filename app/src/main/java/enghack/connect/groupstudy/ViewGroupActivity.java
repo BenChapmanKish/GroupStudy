@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,13 +27,16 @@ public class ViewGroupActivity extends AppCompatActivity {
 
 	private final static String TAG = "ViewGroupActivity: ";
 
-	final Button leaveButton = (Button) findViewById(R.id.leave_button);
+	static boolean groupMember = false;
+	//static boolean removeMe = false;
+	//static boolean addMe = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_group);
 
+		final Button leaveButton = (Button) findViewById(R.id.leave_button);
 		final TextView nameView = (TextView) findViewById(R.id.nameView);
 		final TextView locationView = (TextView) findViewById(R.id.locationView);
 		final LinearLayout userView = (LinearLayout) findViewById(R.id.userView);
@@ -48,7 +52,11 @@ public class ViewGroupActivity extends AppCompatActivity {
 		/*leaveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				database.removeValue()
+				if (groupMember) {
+					removeMe = true;
+				} else {
+					addMe = true;
+				}
 			}
 		});*/
 
@@ -68,6 +76,15 @@ public class ViewGroupActivity extends AppCompatActivity {
 					members.add(member.getValue().toString());
 				}
 
+				String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+				if (members.contains(UID)) {
+					groupMember = true;
+					leaveButton.setText("Leave Group");
+				} else {
+					groupMember = false;
+					leaveButton.setText("Join Group");
+				}
 
 
 				Log.d(TAG, "users: " + dataSnapshot.child("users").getChildren().toString());
