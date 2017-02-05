@@ -36,10 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
 	}
 
-	public void browseGroups(View view){
-		Intent myIntent = new Intent(MainActivity.this, browseGroups.class);
-		MainActivity.this.startActivity(myIntent);
-	}
 
 	public void profile(View view){
 		Intent myIntent = new Intent(MainActivity.this, MyProfileActivity.class);
@@ -48,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
 	public void findGroups(View view){
 		Intent myIntent = new Intent(MainActivity.this, findGroups.class);
+		MainActivity.this.startActivity(myIntent);
+	}
+
+	public void Notifications(View view){
+		Intent myIntent = new Intent(MainActivity.this, Notifications.class);
 		MainActivity.this.startActivity(myIntent);
 	}
 }

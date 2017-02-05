@@ -1,16 +1,13 @@
 package enghack.connect.groupstudy;
 
-import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
 
-public class browseGroups extends AppCompatActivity {
+public class Notifications extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_browse_groups);
-
+        setContentView(R.layout.activity_notifications);
     }
 }
