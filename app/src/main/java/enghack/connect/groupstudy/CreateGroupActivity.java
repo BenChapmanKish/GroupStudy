@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -96,7 +97,9 @@ public class CreateGroupActivity extends AppCompatActivity {
         // Disable button so there are no multi-posts
         Toast.makeText(this, "Posting...", Toast.LENGTH_SHORT).show();
 
-	    PostGroup(group, course, location);
+	    String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+	    PostGroup(userid, group, course, location);
 
         /*// [START single_value_read]
         database.child("users").child(userId).addListenerForSingleValueEvent(
@@ -132,9 +135,9 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
 	// [START write_fan_out]
-	private void PostGroup(String name, String course, String Location) {
+	private void PostGroup(String userid, String name, String course, String Location) {
 		String key = database.child("groups").push().getKey();
-		StudyGroup group = new StudyGroup(name, course, location);
+		StudyGroup group = new StudyGroup(name, course, location, userid);
 		Map<String, Object> postValues = group.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

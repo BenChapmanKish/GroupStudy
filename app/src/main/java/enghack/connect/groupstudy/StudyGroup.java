@@ -16,17 +16,18 @@ public class StudyGroup {
 	public String group_name;
 	public String course_name;
 	public String meeting_location;
-	public ArrayList<Long> member_ids;
+	public ArrayList<String> member_ids;
 
 	public StudyGroup() {
 		// Default constructor required for calls to DataSnapshot.getValue(Post.class)
 	}
 
-	public StudyGroup(String name, String course, String location) {
+	public StudyGroup(String name, String course, String location, String userid) {
 		this.group_name = name;
 		this.course_name = course;
 		this.meeting_location = location;
-		this.member_ids = new ArrayList<Long>();
+		this.member_ids = new ArrayList<>();
+		this.member_ids.add(userid);
 	}
 
 	// [START post_to_map]

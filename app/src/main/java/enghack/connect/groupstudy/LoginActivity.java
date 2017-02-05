@@ -60,12 +60,12 @@ public class LoginActivity extends AppCompatActivity {
 
 		final Intent list_groups_intent = new Intent(this, MainActivity.class);
 
-		database = FirebaseDatabase.getInstance().getReference("users");
+		database = FirebaseDatabase.getInstance().getReference();
 
 
 		callbackmanager = CallbackManager.Factory.create();
 
-		loginButton.setReadPermissions("email", "public_profile", "user_education_history");
+		loginButton.setReadPermissions("email", "public_profile");
 		loginButton.registerCallback(callbackmanager, new FacebookCallback<LoginResult>() {
 			@Override
 			public void onSuccess(LoginResult loginResult) {
@@ -101,6 +101,27 @@ public class LoginActivity extends AppCompatActivity {
 
 
 					// Create new user for database
+
+					DatabaseReference newUser = FirebaseDatabase.getInstance()
+							.getReference("users")
+							.child(fbuser.getUid());
+
+					newUser.addListenerForSingleValueEvent(new ValueEventListener() {
+					@Override
+					public void onDataChange(DataSnapshot snapshot) {
+						if (!snapshot.exists()) {
+							Log.e(TAG, "User not found");
+
+							FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
+							createNewUser(fbuser.getUid(), fbuser.getDisplayName(), fbuser.getPhotoUrl().toString());
+						}
+					}
+
+					@Override
+					public void onCancelled(DatabaseError databaseError) {
+						Log.e(TAG, databaseError.toString());
+					}
+				});
 
 					database.orderByKey().equalTo(fbuser.getUid()).addValueEventListener(new ValueEventListener() {
 						@Override
