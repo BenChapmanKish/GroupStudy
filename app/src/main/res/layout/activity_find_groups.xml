@@ -10,4 +10,36 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="enghack.connect.groupstudy.FindGroupsActivity">
 
+    <Button
+        android:text="Submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="164dp"
+        android:id="@+id/create_group_button"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        android:id="@+id/group_name_field"
+        android:hint="Course Name"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:layout_below="@+id/group_name_field"
+        android:layout_alignLeft="@+id/group_name_field"
+        android:layout_alignStart="@+id/group_name_field"
+        android:layout_marginTop="15dp"
+        android:id="@+id/course_id_field"
+        android:hint="Course ID"/>
+
 </RelativeLayout>

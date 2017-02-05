@@ -3,6 +3,7 @@ package enghack.connect.groupstudy;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +16,8 @@ public class User {
 
 	public String name;
 	public String photo_url;
-	public Long[] search_courses;
-	public Long[] groups;
+	public ArrayList<Long> search_courses;
+	public ArrayList<Long> groups;
 
 	public User() {
 		// Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -25,8 +26,8 @@ public class User {
 	public User(String name, String purl) {
 		this.name = name;
 		this.photo_url = purl;
-		this.search_courses = new Long[0];
-		this.groups = new Long[0];
+		this.search_courses = new ArrayList<>();
+		this.groups = new ArrayList<>();
 	}
 
 	// [START post_to_map]

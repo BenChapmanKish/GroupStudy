@@ -3,6 +3,7 @@ package enghack.connect.groupstudy;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,18 +15,18 @@ import java.util.Map;
 public class StudyGroup {
 	public String group_name;
 	public Long course_id;
-	public Long[] member_ids;
+	public ArrayList<Long> member_ids;
 	public Long meetup_loc_id;
 
 	public StudyGroup() {
 		// Default constructor required for calls to DataSnapshot.getValue(Post.class)
 	}
 
-	public StudyGroup(String name, Long course, Long[] members, Long location) {
+	public StudyGroup(String name, Long course) {
 		this.group_name = name;
 		this.course_id = course;
-		this.member_ids = members;
-		this.meetup_loc_id = location;
+		this.member_ids = new ArrayList<Long>();
+		this.meetup_loc_id = -1L;
 	}
 
 	// [START post_to_map]

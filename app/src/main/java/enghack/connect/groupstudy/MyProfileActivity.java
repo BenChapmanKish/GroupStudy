@@ -68,9 +68,6 @@ public class MyProfileActivity extends AppCompatActivity {
 				    // User is signed in
 				    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
-				    //user.getDisplayName();
-				    //user.getPhotoUrl();
-
 			    } else {
 				    // User is signed out
 				    Log.d(TAG, "onAuthStateChanged:signed_out");
