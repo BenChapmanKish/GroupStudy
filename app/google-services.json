@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "600353828934",
+    "firebase_url": "https://groupstudy-d5c14.firebaseio.com",
+    "project_id": "groupstudy-d5c14",
+    "storage_bucket": "groupstudy-d5c14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600353828934:android:c1a099c4985ee7fb",
+        "android_client_info": {
+          "package_name": "enghack.connect.groupstudy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600353828934-14remme0tnchclg3q7tneumfh89ng8i8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM2acSAehcEL7DGZJzDCFRcnIjsOS8-tU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

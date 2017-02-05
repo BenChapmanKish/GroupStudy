@@ -3,11 +3,11 @@ package enghack.connect.groupstudy;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class profile extends AppCompatActivity {
+public class Notifications extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_notifications);
     }
 }
