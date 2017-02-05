@@ -10,4 +10,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="enghack.connect.groupstudy.NotificationsActivity">
 
+    <TextView
+        android:text="Under Construction..."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="196dp"
+        android:id="@+id/textView5"
+        android:textSize="24sp"
+        android:textStyle="normal|italic"/>
 </RelativeLayout>

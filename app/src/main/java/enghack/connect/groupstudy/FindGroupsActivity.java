@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +30,7 @@ public class FindGroupsActivity extends AppCompatActivity {
 
 	Button create_group;
     private EditText group_name;
-    private EditText course_id;
+    private Spinner course_spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class FindGroupsActivity extends AppCompatActivity {
 	    database = FirebaseDatabase.getInstance().getReference();
 
         group_name = (EditText) findViewById(R.id.group_name_field);
-        course_id = (EditText) findViewById(R.id.course_id_field);
+        course_spinner = (Spinner) findViewById(R.id.course_spinner);
 
         create_group.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +54,8 @@ public class FindGroupsActivity extends AppCompatActivity {
 
     private void createNewGroup() {
         final String group = group_name.getText().toString();
-        final Long id = Long.valueOf(course_id.getText().toString());
+	    final Spinner course_spinner = (Spinner) findViewById(R.id.course_spinner);
+        final Long id = Long.valueOf(Spinner.getSelectedItem().toString());
 
         // Name is required
         if (TextUtils.isEmpty(group)) {
@@ -63,12 +65,11 @@ public class FindGroupsActivity extends AppCompatActivity {
 
         // ID is required
         if (id < 0) {
-            course_id.setError(REQUIRED);
+            course_spinner.setError(REQUIRED);
             return;
         }
 
         // Disable button so there are no multi-posts
-       // setEditingEnabled(false);
         Toast.makeText(this, "Posting...", Toast.LENGTH_SHORT).show();
 
 	    writeNewPost(group, id);
@@ -94,7 +95,6 @@ public class FindGroupsActivity extends AppCompatActivity {
                         }
 
                         // Finish this Activity, back to the stream
-                        setEditingEnabled(true);
                         finish();
                         // [END_EXCLUDE]
                     }
@@ -102,23 +102,10 @@ public class FindGroupsActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         Log.w(TAG, "getUser:onCancelled", databaseError.toException());
-                        // [START_EXCLUDE]
-                        setEditingEnabled(true);
-                        // [END_EXCLUDE]
                     }
                 });
         // [END single_value_read]*/
     }
-
-	private void setEditingEnabled(boolean enabled) {
-		group_name.setEnabled(enabled);
-		course_id.setEnabled(enabled);
-		if (enabled) {
-			create_group.setVisibility(View.VISIBLE);
-		} else {
-			create_group.setVisibility(View.GONE);
-		}
-	}
 
 	// [START write_fan_out]
 	private void writeNewPost(String name, Long id) {
