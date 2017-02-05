@@ -11,8 +11,36 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="enghack.connect.groupstudy.EmptyActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:text="Browse Groups"
+        android:onClick="browseGroups"
+        android:id="@+id/browseGroups"
+        android:layout_below="@+id/findGroup"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="49dp" />
+
+    <Button
+        android:text="Profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Profile"
+        android:onClick="profile"
+        android:layout_marginTop="38dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Find A Group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/findGroup"
+        android:onClick="findGroups"
+        android:layout_marginTop="87dp"
+        android:layout_alignTop="@+id/Profile"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
