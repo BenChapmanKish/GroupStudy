@@ -77,4 +77,18 @@ public class MyProfileActivity extends AppCompatActivity {
 		    }
 	    };
     }
+	public void MainActivity(View view){
+		Intent myIntent = new Intent(MyProfileActivity.this, MainActivity.class);
+		MyProfileActivity.this.startActivity(myIntent);
+	}
+
+	public void Notifications(View view){
+		Intent myIntent = new Intent(MyProfileActivity.this, Notifications.class);
+		MyProfileActivity.this.startActivity(myIntent);
+	}
+
+	public void findGroups(View view){
+		Intent myIntent = new Intent(MyProfileActivity.this, findGroups.class);
+		MyProfileActivity.this.startActivity(myIntent);
+	}
 }
