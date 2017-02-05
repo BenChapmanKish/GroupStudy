@@ -49,7 +49,6 @@ public class CreateGroupActivity extends AppCompatActivity {
     private void createNewGroup() {
         final String group = group_name.getText().toString();
 	    final Spinner course_spinner = (Spinner) findViewById(R.id.course_spinner);
-        final Long id = Long.valueOf(Spinner.getSelectedItem().toString());
 
         // Name is required
         if (TextUtils.isEmpty(group)) {
@@ -58,14 +57,14 @@ public class CreateGroupActivity extends AppCompatActivity {
         }
 
         // ID is required
-        if (id < 0) {
+        if (TextUtils.isEmpty(course)) {
             return;
         }
 
         // Disable button so there are no multi-posts
         Toast.makeText(this, "Posting...", Toast.LENGTH_SHORT).show();
 
-	    writeNewPost(group, id);
+	    writeNewPost(group, course);
 
         /*// [START single_value_read]
         database.child("users").child(userId).addListenerForSingleValueEvent(
@@ -101,9 +100,9 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
 	// [START write_fan_out]
-	private void writeNewPost(String name, Long id) {
+	private void writeNewPost(String name, String course) {
 		String key = database.child("groups").push().getKey();
-		StudyGroup group = new StudyGroup(name, id);
+		StudyGroup group = new StudyGroup(name, course);
 		Map<String, Object> postValues = group.toMap();
 
 		Map<String, Object> childUpdates = new HashMap<>();
