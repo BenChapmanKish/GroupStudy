@@ -52,5 +52,5 @@
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/button7"
         android:layout_toStartOf="@+id/button7"
-        android:onClick="profile" />
+        android:onClick="profile (MainActivity)" />
 </RelativeLayout>
