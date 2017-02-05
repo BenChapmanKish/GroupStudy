@@ -12,19 +12,18 @@ public class FindGroupsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_edit);
-        EditText frstName = (EditText)findViewById(R.id.firstName);
+        setContentView(R.layout.activity_my_profile);
 
-        Button btn =(Button)findViewById(R.id.Done);
+        /*Button btn = (Button) findViewById(R.id.Done);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText frstName = (EditText)findViewById(R.id.firstName);
-                EditText lastName = (EditText)findViewById(R.id.lastName);
-                EditText school = (EditText)findViewById(R.id.School);
+                EditText firstNameField = (EditText)findViewById(R.id.firstName);
+                EditText lastNameField = (EditText)findViewById(R.id.lastName);
+                EditText schoolField = (EditText)findViewById(R.id.School);
 
             }
-        });
+        });*/
     }
 
 

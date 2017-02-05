@@ -38,6 +38,7 @@
         <activity android:name=".MyProfileActivity"/>
         <activity android:name=".ViewProfileActivity"/>
         <activity android:name=".FindGroupsActivity"/>
+        <activity android:name=".NotificationsActivity"/>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

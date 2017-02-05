@@ -22,8 +22,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -92,10 +95,24 @@ public class AuthActivity extends AppCompatActivity {
 
 					// Create new user for database
 
+					database.orderByKey().equalTo(fbuser.getUid()).addValueEventListener(new ValueEventListener() {
+						@Override
+						public void onDataChange(DataSnapshot dataSnapshot) {
+							if(dataSnapshot == null || dataSnapshot.getChildren() == null) {
+								// User not in database
 
+								FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
+								User dbuser = new User(fbuser.getDisplayName(), fbuser.getPhotoUrl().toString());
+								database.child("users").child(fbuser.getUid()).setValue(dbuser);
 
-					User dbuser = new User(fbuser.getDisplayName(), fbuser.getPhotoUrl().toString());
-					database.child("users").child(fbuser.getUid()).setValue(dbuser);
+							}
+						}
+
+						@Override
+						public void onCancelled(DatabaseError databaseError) {
+
+						}
+					});
 
 
 
