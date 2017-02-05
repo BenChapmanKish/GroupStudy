@@ -15,18 +15,18 @@ import java.util.Map;
 public class StudyGroup {
 	public String group_name;
 	public String course_name;
+	public String meeting_location;
 	public ArrayList<Long> member_ids;
-	public Long meetup_loc_id;
 
 	public StudyGroup() {
 		// Default constructor required for calls to DataSnapshot.getValue(Post.class)
 	}
 
-	public StudyGroup(String name, String course) {
+	public StudyGroup(String name, String course, String location) {
 		this.group_name = name;
 		this.course_name = course;
+		this.meeting_location = location;
 		this.member_ids = new ArrayList<Long>();
-		this.meetup_loc_id = -1L;
 	}
 
 	// [START post_to_map]
@@ -34,9 +34,9 @@ public class StudyGroup {
 	public Map<String, Object> toMap() {
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("group_name", group_name);
-		result.put("course_id", course_name);
+		result.put("course_name", course_name);
+		result.put("meeting_location", meeting_location);
 		result.put("member_ids", member_ids);
-		result.put("meetup_loc_id", meetup_loc_id);
 
 		return result;
 	}

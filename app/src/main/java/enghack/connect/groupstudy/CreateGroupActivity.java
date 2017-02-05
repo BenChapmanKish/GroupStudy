@@ -1,6 +1,5 @@
 package enghack.connect.groupstudy;
 
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,8 +26,10 @@ public class CreateGroupActivity extends AppCompatActivity {
 
     Button create_group;
     private EditText group_name;
-    private Spinner course_spinner;
-    private String course;
+	private EditText course_name;
+    private Spinner location_spinner;
+    private String location;
+	private String course;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +41,26 @@ public class CreateGroupActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
 
         group_name = (EditText) findViewById(R.id.group_name_field);
-        course_spinner = (Spinner) findViewById(R.id.course_spinner);
+	    course_name = (EditText) findViewById(R.id.course_name_field);
+        location_spinner = (Spinner) findViewById(R.id.location_spinner);
 
-        course_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        location_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // On selecting a spinner item
-                course = parent.getItemAtPosition(position).toString();
+                location = parent.getItemAtPosition(position).toString();
 
                 // Showing selected spinner item
-                Toast.makeText(parent.getContext(), "Selected: " + course, Toast.LENGTH_LONG).show();
+                Toast.makeText(parent.getContext(), "Selected: " + location, Toast.LENGTH_LONG).show();
             }
             public void onNothingSelected(AdapterView<?> arg0) {
 
             }
         });
 
-        String[] items = new String[]{"1", "2", "three"};
+        String[] items = new String[]{"V1 Great Hall", "UWP Grand Commons", "Dana Porter", "SLC Third Floor", "CLV Community Centre", "Davis Centre"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        course_spinner.setAdapter(adapter);
+        location_spinner.setAdapter(adapter);
 
 
 
@@ -72,7 +74,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
     private void createNewGroup() {
         final String group = group_name.getText().toString();
-        final Spinner course_spinner = (Spinner) findViewById(R.id.course_spinner);
+	    final String course = course_name.getText().toString();
 
         // Name is required
         if (TextUtils.isEmpty(group)) {
@@ -80,15 +82,21 @@ public class CreateGroupActivity extends AppCompatActivity {
             return;
         }
 
-        // ID is required
-        if (TextUtils.isEmpty(course)) {
+	    // Course is required
+	    if (TextUtils.isEmpty(course)) {
+		    course_name.setError(REQUIRED);
+		    return;
+	    }
+
+        // Location is required
+        if (TextUtils.isEmpty(location)) {
             return;
         }
 
         // Disable button so there are no multi-posts
         Toast.makeText(this, "Posting...", Toast.LENGTH_SHORT).show();
 
-	    writeNewPost(group, course);
+	    PostGroup(group, course, location);
 
         /*// [START single_value_read]
         database.child("users").child(userId).addListenerForSingleValueEvent(
@@ -124,9 +132,9 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
 	// [START write_fan_out]
-	private void writeNewPost(String name, String course) {
+	private void PostGroup(String name, String course, String Location) {
 		String key = database.child("groups").push().getKey();
-		StudyGroup group = new StudyGroup(name, course);
+		StudyGroup group = new StudyGroup(name, course, location);
 		Map<String, Object> postValues = group.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
