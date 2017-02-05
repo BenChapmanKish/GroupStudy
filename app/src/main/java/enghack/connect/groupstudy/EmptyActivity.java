@@ -15,11 +15,6 @@ public class EmptyActivity extends AppCompatActivity {
 
 	}
 
-	public void browseGroups(View view){
-		Intent myIntent = new Intent(EmptyActivity.this, browseGroups.class);
-		EmptyActivity.this.startActivity(myIntent);
-	}
-
 	public void profile(View view){
 		Intent myIntent = new Intent(EmptyActivity.this, profile.class);
 		EmptyActivity.this.startActivity(myIntent);
