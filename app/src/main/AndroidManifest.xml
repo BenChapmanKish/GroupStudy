@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".browseGroups" />
-        <activity android:name=".profile" />
+        <activity android:name=".MyProfileActivity" />
         <activity android:name=".findGroups"></activity>
         <activity android:name=".AuthActivity">
         </activity>

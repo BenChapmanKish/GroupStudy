@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class AuthActivity extends AppCompatActivity {
 
-	private static final String TAG = "GroupStudy: ";
+	private static final String TAG = "AuthActivity: ";
 	LoginButton loginButton;
 	public static CallbackManager callbackmanager;
 	private FirebaseAuth mAuth;
@@ -50,16 +50,19 @@ public class AuthActivity extends AppCompatActivity {
 			public void onSuccess(LoginResult loginResult) {
 				Log.d(TAG, "facebook:onSuccess:" + loginResult);
 				handleFacebookAccessToken(loginResult.getAccessToken());
+				finish();
 			}
 
 			@Override
 			public void onCancel() {
 				Log.d(TAG, "facebook:onCancel");
+				finish();
 			}
 
 			@Override
 			public void onError(FacebookException error) {
 				Log.e(TAG, "facebook:onError", error);
+				finish();
 			}
 		});
 
@@ -75,6 +78,7 @@ public class AuthActivity extends AppCompatActivity {
 
 					//user.getDisplayName();
 					//user.getPhotoUrl();
+					finish();
 
 				} else {
 					// User is signed out
@@ -125,7 +129,6 @@ public class AuthActivity extends AppCompatActivity {
 									Toast.LENGTH_SHORT).show();
 						}
 
-						// ...
 					}
 				});
 	}

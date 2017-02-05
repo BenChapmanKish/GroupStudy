@@ -11,12 +11,43 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="enghack.connect.groupstudy.AuthActivity">
 
+    <TextView
+        android:text="Welcome to GroupStudy!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/intro_header"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textStyle="normal|bold"
+        android:typeface="sans"
+        android:fontFamily="sans-serif"/>
+
+    <TextView
+        android:text="We use Facebook to keep track of users and build your profile. Please log in with the button below."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intro_header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:id="@+id/intro_explain"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="88dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="31dp"
+        android:textSize="18sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:layout_below="@+id/intro_explain"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>
