@@ -10,12 +10,21 @@ import com.facebook.appevents.AppEventsLogger;
 
 public class MainActivity extends AppCompatActivity {
 
+	boolean first = true;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
 		FacebookSdk.sdkInitialize(getApplicationContext());
 		AppEventsLogger.activateApp(this);
+
+		if (first) {
+			first = false;
+			Intent intent = new Intent(this, AuthActivity.class);
+			startActivity(intent);
+		}
 
 	}
 
