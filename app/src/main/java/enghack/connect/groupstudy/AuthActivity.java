@@ -22,6 +22,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -30,6 +32,9 @@ public class AuthActivity extends AppCompatActivity {
 	public static CallbackManager callbackmanager;
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
+
+	DatabaseReference database;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,10 @@ public class AuthActivity extends AppCompatActivity {
 		FacebookSdk.sdkInitialize(getApplicationContext());
 		AppEventsLogger.activateApp(this);
 
+		final Intent list_groups_intent = new Intent(this, MainActivity.class);
+
+		database = FirebaseDatabase.getInstance().getReference("users");
+
 
 		callbackmanager = CallbackManager.Factory.create();
 		loginButton = (LoginButton) findViewById(R.id.login_button);
@@ -51,18 +60,21 @@ public class AuthActivity extends AppCompatActivity {
 				Log.d(TAG, "facebook:onSuccess:" + loginResult);
 				handleFacebookAccessToken(loginResult.getAccessToken());
 				finish();
+				startActivity(list_groups_intent);
 			}
 
 			@Override
 			public void onCancel() {
 				Log.d(TAG, "facebook:onCancel");
 				finish();
+				startActivity(list_groups_intent);
 			}
 
 			@Override
 			public void onError(FacebookException error) {
 				Log.e(TAG, "facebook:onError", error);
 				finish();
+				startActivity(list_groups_intent);
 			}
 		});
 
@@ -71,14 +83,24 @@ public class AuthActivity extends AppCompatActivity {
 		mAuthListener = new FirebaseAuth.AuthStateListener() {
 			@Override
 			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-				FirebaseUser user = firebaseAuth.getCurrentUser();
-				if (user != null) {
+				FirebaseUser fbuser = firebaseAuth.getCurrentUser();
+				if (fbuser != null) {
 					// User is signed in
-					Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+					Log.d(TAG, "onAuthStateChanged:signed_in:" + fbuser.getUid());
 
-					//user.getDisplayName();
-					//user.getPhotoUrl();
+
+
+					// Create new user for database
+
+
+
+					User dbuser = new User(fbuser.getDisplayName(), fbuser.getPhotoUrl().toString());
+					database.child("users").child(fbuser.getUid()).setValue(dbuser);
+
+
+
 					finish();
+					startActivity(list_groups_intent);
 
 				} else {
 					// User is signed out

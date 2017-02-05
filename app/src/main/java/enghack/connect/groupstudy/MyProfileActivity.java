@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -21,24 +20,26 @@ public class MyProfileActivity extends AppCompatActivity {
 
 	private static final String TAG = "MyProfileActivity: ";
 
-	private FirebaseAuth.AuthStateListener mAuthListener;
+	FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_my_profile);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
-        final Intent login_intent = new Intent(this, AuthActivity.class);
+	    final Intent login_intent = new Intent(this, AuthActivity.class);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            startActivity(login_intent);
-        }
+	    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-	   final AlertDialog.Builder confirmLogout = new AlertDialog.Builder(this)
+	    // We require the user to be logged in
+	    if (user == null) {
+		    startActivity(login_intent);
+	    }
+
+	    final AlertDialog.Builder confirmLogout = new AlertDialog.Builder(this)
 			    .setTitle("Log Out")
 			    .setMessage("Do you really want to log out?")
 			    .setIcon(android.R.drawable.ic_dialog_alert)
@@ -48,6 +49,7 @@ public class MyProfileActivity extends AppCompatActivity {
 					    FirebaseAuth.getInstance().signOut();
 					    LoginManager.getInstance().logOut();
 					    finish();
+					    startActivity(login_intent);
 				    }})
 			    .setNegativeButton(android.R.string.no, null);
 
@@ -77,18 +79,4 @@ public class MyProfileActivity extends AppCompatActivity {
 		    }
 	    };
     }
-	public void MainActivity(View view){
-		Intent myIntent = new Intent(MyProfileActivity.this, MainActivity.class);
-		MyProfileActivity.this.startActivity(myIntent);
-	}
-
-	public void Notifications(View view){
-		Intent myIntent = new Intent(MyProfileActivity.this, Notifications.class);
-		MyProfileActivity.this.startActivity(myIntent);
-	}
-
-	public void findGroups(View view){
-		Intent myIntent = new Intent(MyProfileActivity.this, findGroups.class);
-		MyProfileActivity.this.startActivity(myIntent);
-	}
 }

@@ -8,49 +8,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="enghack.connect.groupstudy.findGroups">
-
-    <Button
-        android:text="Current"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/button6"
-        android:textSize="8sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="MainActivity (findGroups)"/>
-
-    <Button
-        android:text="Find"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/button5"
-        android:textSize="8sp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/button6"
-        android:layout_toEndOf="@+id/button6" />
-
-    <Button
-        android:text="Notifications"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/button7"
-        tools:textSize="8sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="Notifications"/>
-
-    <Button
-        android:text="Profile"
-        android:layout_height="wrap_content"
-        android:id="@+id/profile_button"
-        android:textSize="8sp"
-        android:layout_width="85dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/button7"
-        android:layout_toStartOf="@+id/button7"
-        android:onClick="profile" />
+    tools:context="enghack.connect.groupstudy.FindGroupsActivity">
 
 </RelativeLayout>

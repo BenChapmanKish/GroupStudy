@@ -5,14 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class profile_edit extends AppCompatActivity {
+public class FindGroupsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_edit);
+        setContentView(R.layout.activity_main);
+
     }
-
-
-
 }

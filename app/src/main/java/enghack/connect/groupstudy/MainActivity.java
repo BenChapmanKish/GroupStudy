@@ -8,13 +8,17 @@ import android.widget.Button;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
 	private static final String TAG = "MainActivity: ";
+
+	private DatabaseReference mDatabase;
+	FirebaseDatabase database;
 
 
 	@Override
@@ -22,33 +26,47 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		// Initialize the facebook logging and analytics
 		FacebookSdk.sdkInitialize(getApplicationContext());
 		AppEventsLogger.activateApp(this);
 
-		final Intent profile_intent = new Intent(this, MyProfileActivity.class);
+		// Create the intents for launching every activity
+		final Intent login_intent =         new Intent(this, AuthActivity.class);
+		final Intent profile_intent =       new Intent(this, MyProfileActivity.class);
+		final Intent find_group_intent =    new Intent(this, FindGroupsActivity.class);
+		final Intent notifications_intent = new Intent(this, NotificationsActivity.class);
 
-		Button logout_button = (Button) findViewById(R.id.profile_button);
-		logout_button.setOnClickListener(new View.OnClickListener() {
+		FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+		// We require the user to be logged in
+		if (user == null) {
+			startActivity(login_intent);
+		}
+
+		Button profile_button = (Button) findViewById(R.id.profile_button);
+		profile_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				MainActivity.this.startActivity(profile_intent);
 			}
 		});
 
+		Button find_groups_button = (Button) findViewById(R.id.find_groups_button);
+		find_groups_button.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				MainActivity.this.startActivity(find_group_intent);
+			}
+		});
+
+		Button notifications_button = (Button) findViewById(R.id.notifications_button);
+		notifications_button.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				MainActivity.this.startActivity(notifications_intent);
+			}
+		});
+
+		FirebaseDatabase database = FirebaseDatabase.getInstance();
+		DatabaseReference myRef = database.getReference("message");
+
 	}
 
-
-	public void profile(View view){
-		Intent myIntent = new Intent(MainActivity.this, MyProfileActivity.class);
-		MainActivity.this.startActivity(myIntent);
-	}
-
-	public void findGroups(View view){
-		Intent myIntent = new Intent(MainActivity.this, findGroups.class);
-		MainActivity.this.startActivity(myIntent);
-	}
-
-	public void Notifications(View view){
-		Intent myIntent = new Intent(MainActivity.this, Notifications.class);
-		MainActivity.this.startActivity(myIntent);
-	}
 }
