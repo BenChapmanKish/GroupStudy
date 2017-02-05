@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -28,9 +30,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class AuthActivity extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
 
-	private static final String TAG = "AuthActivity: ";
+import static android.view.View.VISIBLE;
+
+public class LoginActivity extends AppCompatActivity {
+
+	private static final String TAG = "LoginActivity: ";
 	LoginButton loginButton;
 	public static CallbackManager callbackmanager;
 	private FirebaseAuth mAuth;
@@ -42,7 +49,9 @@ public class AuthActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_auth);
+		setContentView(R.layout.activity_login);
+
+		loginButton = (LoginButton) findViewById(R.id.login_button);
 
 
 		// Initialize SDK before setContentView(Layout ID)
@@ -55,7 +64,7 @@ public class AuthActivity extends AppCompatActivity {
 
 
 		callbackmanager = CallbackManager.Factory.create();
-		loginButton = (LoginButton) findViewById(R.id.login_button);
+
 		loginButton.setReadPermissions("email", "public_profile", "user_education_history");
 		loginButton.registerCallback(callbackmanager, new FacebookCallback<LoginResult>() {
 			@Override
@@ -70,14 +79,12 @@ public class AuthActivity extends AppCompatActivity {
 			public void onCancel() {
 				Log.d(TAG, "facebook:onCancel");
 				finish();
-				startActivity(list_groups_intent);
 			}
 
 			@Override
 			public void onError(FacebookException error) {
 				Log.e(TAG, "facebook:onError", error);
 				finish();
-				startActivity(list_groups_intent);
 			}
 		});
 
@@ -102,8 +109,8 @@ public class AuthActivity extends AppCompatActivity {
 								// User not in database
 
 								FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
-								User dbuser = new User(fbuser.getDisplayName(), fbuser.getPhotoUrl().toString());
-								database.child("users").child(fbuser.getUid()).setValue(dbuser);
+								createNewUser(fbuser.getUid(), fbuser.getDisplayName(), fbuser.getPhotoUrl().toString());
+
 
 							}
 						}
@@ -114,8 +121,6 @@ public class AuthActivity extends AppCompatActivity {
 						}
 					});
 
-
-
 					finish();
 					startActivity(list_groups_intent);
 
@@ -125,6 +130,19 @@ public class AuthActivity extends AppCompatActivity {
 				}
 			}
 		};
+
+	}
+
+	private void createNewUser(String userId, String name, String purl) {
+
+		User dbuser = new User(name, purl);
+		database.child("users").child(userId).setValue(dbuser);
+		Map<String, Object> postValues = dbuser.toMap();
+
+		Map<String, Object> childUpdates = new HashMap<>();
+		childUpdates.put("/users/" + userId, postValues);
+
+		database.updateChildren(childUpdates);
 	}
 
 	@Override
@@ -164,7 +182,7 @@ public class AuthActivity extends AppCompatActivity {
 						// signed in user can be handled in the listener.
 						if (!task.isSuccessful()) {
 							Log.w(TAG, "signInWithCredential", task.getException());
-							Toast.makeText(AuthActivity.this, "Authentication failed.",
+							Toast.makeText(LoginActivity.this, "Authentication failed.",
 									Toast.LENGTH_SHORT).show();
 						}
 

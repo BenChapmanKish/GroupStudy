@@ -30,7 +30,7 @@ public class MyProfileActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
-	    final Intent login_intent = new Intent(this, AuthActivity.class);
+	    final Intent login_intent = new Intent(this, LoginActivity.class);
 
 	    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -67,9 +67,6 @@ public class MyProfileActivity extends AppCompatActivity {
 			    if (user != null) {
 				    // User is signed in
 				    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-
-				    //user.getDisplayName();
-				    //user.getPhotoUrl();
 
 			    } else {
 				    // User is signed out
