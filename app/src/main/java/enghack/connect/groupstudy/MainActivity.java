@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
 		// Create the intents for launching every activity
 		final Intent login_intent =         new Intent(this, LoginActivity.class);
 		final Intent profile_intent =       new Intent(this, MyProfileActivity.class);
-		final Intent find_group_intent =    new Intent(this, FindGroupsActivity.class);
-		final Intent notifications_intent = new Intent(this, NotificationsActivity.class);
+		final Intent find_group_intent =    new Intent(this, CreateGroupActivity.class);
+		final Intent create_group_intent =  new Intent(this, FindGroupsActivity.class);
 
 		FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -87,10 +87,10 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
-		Button notifications_button = (Button) findViewById(R.id.notifications_button);
-		notifications_button.setOnClickListener(new View.OnClickListener() {
+		final Button create_group_button = (Button) findViewById(R.id.create_group_button);
+		create_group_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				MainActivity.this.startActivity(notifications_intent);
+				MainActivity.this.startActivity(create_group_intent);
 			}
 		});
 
