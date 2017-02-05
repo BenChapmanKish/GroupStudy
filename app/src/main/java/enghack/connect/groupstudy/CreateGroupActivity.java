@@ -1,9 +1,12 @@
 package enghack.connect.groupstudy;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -17,14 +20,15 @@ import java.util.Map;
 
 public class CreateGroupActivity extends AppCompatActivity {
 
-	private static final String TAG = "CreateGroupActivity: ";
-	private static final String REQUIRED = "Required";
+    private static final String TAG = "CreateGroupActivity: ";
+    private static final String REQUIRED = "Required";
 
-	private DatabaseReference database;
+    private DatabaseReference database;
 
-	Button create_group;
+    Button create_group;
     private EditText group_name;
     private Spinner course_spinner;
+    private String course;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,30 @@ public class CreateGroupActivity extends AppCompatActivity {
 
         create_group = (Button) findViewById(R.id.create_group_button);
 
-	    database = FirebaseDatabase.getInstance().getReference();
+        database = FirebaseDatabase.getInstance().getReference();
 
         group_name = (EditText) findViewById(R.id.group_name_field);
         course_spinner = (Spinner) findViewById(R.id.course_spinner);
+
+        course_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // On selecting a spinner item
+                course = parent.getItemAtPosition(position).toString();
+
+                // Showing selected spinner item
+                Toast.makeText(parent.getContext(), "Selected: " + course, Toast.LENGTH_LONG).show();
+            }
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+        String[] items = new String[]{"1", "2", "three"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        course_spinner.setAdapter(adapter);
+
+
 
         create_group.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +72,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
     private void createNewGroup() {
         final String group = group_name.getText().toString();
-	    final Spinner course_spinner = (Spinner) findViewById(R.id.course_spinner);
+        final Spinner course_spinner = (Spinner) findViewById(R.id.course_spinner);
 
         // Name is required
         if (TextUtils.isEmpty(group)) {
@@ -105,11 +129,12 @@ public class CreateGroupActivity extends AppCompatActivity {
 		StudyGroup group = new StudyGroup(name, course);
 		Map<String, Object> postValues = group.toMap();
 
-		Map<String, Object> childUpdates = new HashMap<>();
-		childUpdates.put("/groups/" + key, postValues);
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/groups/" + key, postValues);
 
 		database.updateChildren(childUpdates);
 	}
 	// [END write_fan_out]
+
 
 }
