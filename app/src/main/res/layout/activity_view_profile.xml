@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/lastName"
         android:layout_alignBottom="@+id/textView2"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/firstName"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -74,9 +74,9 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:layout_above="@+id/textView4"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
-        android:id="@+id/editText4" />
+        android:layout_alignLeft="@+id/lastName"
+        android:layout_alignStart="@+id/lastName"
+        android:id="@+id/School" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -87,5 +87,15 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/editText5" />
+
+    <Button
+        android:text="DONE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Done"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/editText5"
+        android:layout_alignStart="@+id/editText5"
+        android:layout_marginBottom="105dp" />
 
 </RelativeLayout>
