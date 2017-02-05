@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 		AppEventsLogger.activateApp(this);
 
 		// Create the intents for launching every activity
-		final Intent login_intent =         new Intent(this, AuthActivity.class);
+		final Intent login_intent =         new Intent(this, LoginActivity.class);
 		final Intent profile_intent =       new Intent(this, MyProfileActivity.class);
 		final Intent find_group_intent =    new Intent(this, FindGroupsActivity.class);
 		final Intent notifications_intent = new Intent(this, NotificationsActivity.class);
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 		// We require the user to be logged in
 		if (user == null) {
-			startActivity(login_intent);
+			finish();
 		}
 
 		Button profile_button = (Button) findViewById(R.id.profile_button);

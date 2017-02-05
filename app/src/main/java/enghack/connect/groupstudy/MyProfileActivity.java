@@ -30,7 +30,7 @@ public class MyProfileActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
-	    final Intent login_intent = new Intent(this, AuthActivity.class);
+	    final Intent login_intent = new Intent(this, LoginActivity.class);
 
 	    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
