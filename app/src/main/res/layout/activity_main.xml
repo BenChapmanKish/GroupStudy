@@ -12,56 +12,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="enghack.connect.groupstudy.MainActivity">
 
-    <ScrollView
-        android:id="@+id/groups_list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8">
-
-    <!--<Button
-        android:text="Current"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/button6"
-        android:textSize="8sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:text="Find"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/find_groups_button"
-        android:textSize="8sp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/button6"
-        android:layout_toEndOf="@+id/button6"
-        android:onClick="findGroups" />
-
-    <Button
-        android:text="Notifications"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/notifications_button"
-        tools:textSize="8sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="Notifications"/>
-
-    <Button
-        android:text="Profile"
-        android:layout_height="wrap_content"
-        android:id="@+id/profile_button"
-        android:textSize="8sp"
-        android:layout_width="85dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/notifications_button"
-        android:layout_toStartOf="@+id/notifications_button"
-        android:onClick="profile (MainActivity)" />-->
-
-    </ScrollView>
+        android:layout_height="364dp"
+        android:layout_weight="0.79" />
 
     <LinearLayout
         android:orientation="horizontal"
