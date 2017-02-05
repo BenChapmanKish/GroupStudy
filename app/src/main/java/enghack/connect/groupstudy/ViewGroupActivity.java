@@ -19,17 +19,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ViewGroupActivity extends AppCompatActivity {
 
-	// This entire file was really rushed so we just used really bad
-	// lookup techniques by doubly iterating over everything
+	// This entire file was really rushed due to time constraints
+	// so we just used really bad lookup techniques by iterating over everything
 
 	private final static String TAG = "ViewGroupActivity: ";
 
+	DatabaseReference database;
+
 	static boolean groupMember = false;
-	//static boolean removeMe = false;
-	//static boolean addMe = false;
+	static boolean removeMe = false;
+	static boolean addMe = false;
+
+	static ArrayList<String> members;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,24 +47,35 @@ public class ViewGroupActivity extends AppCompatActivity {
 		final TextView locationView = (TextView) findViewById(R.id.locationView);
 		final LinearLayout userView = (LinearLayout) findViewById(R.id.userView);
 
-		final DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+		database = FirebaseDatabase.getInstance().getReference();
 
 		final Intent viewUserIntent = new Intent(this, ViewProfileActivity.class);
 
 		Bundle b = getIntent().getExtras();
-		final String id = b.getString("id");
+		final String id = b.getString("did");
+		Log.d(TAG, "Database ID: " + id);
+
+		final String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
-		/*leaveButton.setOnClickListener(new View.OnClickListener() {
+		leaveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (groupMember) {
-					removeMe = true;
-				} else {
-					addMe = true;
+
+				if (members != null && id != null) {
+					Log.d(TAG, "Changing members attribute for " + UID);
+					if (members.contains(UID)) {
+						database.getRoot().child("groups").child(id).child("member_ids").child(UID).removeValue();
+						Log.d(TAG, "Removed member from database: " + database.getRoot().child("groups").child(id).child("member_ids").toString());
+
+					} else {
+						database.getRoot().child("groups").child(id).child("member_ids");
+						Log.d(TAG, "Added member to database: " + database.getRoot().child("groups").child(id).child("member_ids").toString());
+					}
+					Log.d(TAG, "Member child: " + database.getRoot().child("groups").child(id).child("member_ids").toString());
 				}
 			}
-		});*/
+		});
 
 		ValueEventListener postListener = new ValueEventListener() {
 			@Override
@@ -71,18 +88,21 @@ public class ViewGroupActivity extends AppCompatActivity {
 				nameView.setText(dataSnapshot.child("groups").child(id).child("group_name").getValue().toString());
 				locationView.setText(dataSnapshot.child("groups").child(id).child("meeting_location").getValue().toString());
 
-				ArrayList<String> members = new ArrayList<>();
+				// Kludge to fix this so I can sleep tonight
+				members = new ArrayList<>();
+				ArrayList<String> tmembers = new ArrayList<>();
 				for (final DataSnapshot member : dataSnapshot.child("groups").child(id).child("member_ids").getChildren()) {
 					members.add(member.getValue().toString());
+					tmembers.add(member.getValue().toString());
 				}
 
-				String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-				if (members.contains(UID)) {
-					groupMember = true;
+
+				if (tmembers.contains(UID)) {
+					Log.d(TAG, "Setting leave group button text");
 					leaveButton.setText("Leave Group");
 				} else {
-					groupMember = false;
+					Log.d(TAG, "Setting join group button text");
 					leaveButton.setText("Join Group");
 				}
 
@@ -90,7 +110,7 @@ public class ViewGroupActivity extends AppCompatActivity {
 				Log.d(TAG, "users: " + dataSnapshot.child("users").getChildren().toString());
 				for (final DataSnapshot datumSnapshot : dataSnapshot.child("users").getChildren()) {
 					Log.d(TAG, "Checking member key " + datumSnapshot.getKey());
-					if (members.contains(datumSnapshot.getKey())) {
+					if (tmembers.contains(datumSnapshot.getKey())) {
 						LinearLayout ll = new LinearLayout(getApplicationContext());
 						ll.setOrientation(LinearLayout.VERTICAL);
 						ll.setBackgroundColor(Color.LTGRAY);
@@ -129,5 +149,16 @@ public class ViewGroupActivity extends AppCompatActivity {
 		database.addValueEventListener(postListener);
 
 
+	}
+
+	private void PostGroup(String userid, String name, String course, String location) {
+		String key = database.child("groups").push().getKey();
+		StudyGroup group = new StudyGroup(name, course, location, userid);
+		Map<String, Object> postValues = group.toMap();
+
+		Map<String, Object> childUpdates = new HashMap<>();
+		childUpdates.put("/groups/" + key, postValues);
+
+		database.updateChildren(childUpdates);
 	}
 }

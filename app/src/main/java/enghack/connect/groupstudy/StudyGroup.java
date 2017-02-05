@@ -41,4 +41,12 @@ public class StudyGroup {
 
 		return result;
 	}
+
+	public void addMember(String userid) {
+		this.member_ids.add(userid);
+	}
+
+	public void removeMember(String userid) {
+		this.member_ids.remove(userid);
+	}
 }

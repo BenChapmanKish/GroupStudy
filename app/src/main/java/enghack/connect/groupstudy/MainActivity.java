@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
 		ValueEventListener postListener = new ValueEventListener() {
 			@Override
-			public void onDataChange(DataSnapshot dataSnapshot) {
+			public void onDataChange(final DataSnapshot dataSnapshot) {
 				// Get Post object and use the values to update the UI
 				//Group group = dataSnapshot.getValue(Group.class);
 				if (dataSnapshot == null) return;
@@ -102,7 +102,9 @@ public class MainActivity extends AppCompatActivity {
 					ll.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							viewGroupIntent.putExtra("id", datumSnapshot.getKey());
+							// Fix this
+							Log.d(TAG, "Datum snapshot: " + datumSnapshot.getKey());
+							viewGroupIntent.putExtra("did", datumSnapshot.getKey());
 							startActivity(viewGroupIntent);
 						}
 					});

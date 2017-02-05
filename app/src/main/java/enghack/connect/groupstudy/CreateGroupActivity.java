@@ -101,6 +101,8 @@ public class CreateGroupActivity extends AppCompatActivity {
 
 	    PostGroup(userid, group, course, location);
 
+	    finish();
+
         /*// [START single_value_read]
         database.child("users").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
