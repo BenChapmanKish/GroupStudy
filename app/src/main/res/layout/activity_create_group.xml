@@ -11,7 +11,7 @@
     tools:context="enghack.connect.groupstudy.CreateGroupActivity">
 
     <TextView
-        android:text="Please enter the name of your group and select the course it's for."
+        android:text="Please enter the name of your group, the course it's for, and the meeting location."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -20,17 +20,6 @@
         android:id="@+id/new_group_text"
         android:textSize="18sp"
         android:textAlignment="center"/>
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/course_spinner"
-        android:layout_marginTop="23dp"
-        android:layout_below="@+id/group_name_field"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -43,13 +32,35 @@
         android:layout_below="@+id/new_group_text"
         android:layout_centerHorizontal="true"/>
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/course_name_field"
+        android:layout_marginTop="12dp"
+        android:hint="Course Name"
+        android:layout_below="@+id/group_name_field"
+        android:layout_alignLeft="@+id/group_name_field"
+        android:layout_alignStart="@+id/group_name_field"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/location_spinner"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
     <Button
         android:text="Submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/create_group_button"
-        android:layout_marginTop="29dp"
-        android:layout_below="@+id/course_spinner"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@+id/location_spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"/>
 
 </RelativeLayout>

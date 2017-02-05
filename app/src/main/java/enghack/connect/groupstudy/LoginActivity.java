@@ -108,6 +108,8 @@ public class LoginActivity extends AppCompatActivity {
 							if(dataSnapshot == null || dataSnapshot.getChildren() == null) {
 								// User not in database
 
+								Log.d(TAG, "User logged in for first time");
+
 								FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
 								createNewUser(fbuser.getUid(), fbuser.getDisplayName(), fbuser.getPhotoUrl().toString());
 
@@ -135,8 +137,8 @@ public class LoginActivity extends AppCompatActivity {
 
 	private void createNewUser(String userId, String name, String purl) {
 
+		String key = database.child("users").push().getKey();
 		User dbuser = new User(name, purl);
-		database.child("users").child(userId).setValue(dbuser);
 		Map<String, Object> postValues = dbuser.toMap();
 
 		Map<String, Object> childUpdates = new HashMap<>();
@@ -144,6 +146,7 @@ public class LoginActivity extends AppCompatActivity {
 
 		database.updateChildren(childUpdates);
 	}
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

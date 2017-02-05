@@ -16,6 +16,8 @@ public class User {
 
 	public String name;
 	public String photo_url;
+	public String bio;
+	public Long gender;
 	public ArrayList<Long> search_courses;
 	public ArrayList<Long> groups;
 
@@ -26,6 +28,7 @@ public class User {
 	public User(String name, String purl) {
 		this.name = name;
 		this.photo_url = purl;
+		this.bio = "";
 		this.search_courses = new ArrayList<>();
 		this.groups = new ArrayList<>();
 	}
@@ -36,6 +39,7 @@ public class User {
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("name", name);
 		result.put("photo_url", photo_url);
+		result.put("bio", bio);
 		result.put("search_courses", search_courses);
 		result.put("groups", groups);
 

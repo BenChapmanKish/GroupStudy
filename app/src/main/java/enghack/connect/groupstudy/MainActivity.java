@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
 		// Create the intents for launching every activity
 		final Intent login_intent =         new Intent(this, LoginActivity.class);
 		final Intent profile_intent =       new Intent(this, MyProfileActivity.class);
-		final Intent find_group_intent =    new Intent(this, CreateGroupActivity.class);
-		final Intent create_group_intent =  new Intent(this, FindGroupsActivity.class);
+		final Intent find_group_intent =    new Intent(this, FindGroupsActivity.class);
+		final Intent create_group_intent =  new Intent(this, CreateGroupActivity.class);
 
 		FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
