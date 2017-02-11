@@ -16,8 +16,6 @@
     </string>
     <string name="title_activity_auth">AuthActivity</string>
 
-    <string name="facebook_app_id">404014326600498</string>
-    <string name="fb_login_protocol_scheme">fb404014326600498</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
